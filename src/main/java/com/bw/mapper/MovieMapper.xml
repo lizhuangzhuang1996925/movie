@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bw.mapper.MovieMapper">
+	<select id="movielist" resultType="map">
+	SELECT * FROM movie a,nd b  
+	<where>
+	and a.nid=b.nid
+	<if test="mname!=''">
+	AND mname LIKE '%${mname}%'
+	</if>
+	<if test="mautor!=''">
+	AND mautor LIKE '%${mautor}%'
+	</if>
+	<if test="mindate!=''">
+	<if test="maxdate!=''">
+	AND mdate BETWEEN #{mindate} AND #{maxdate}
+	</if>
+	</if>
+	<if test="minprice!=''">
+	<if test="maxprice!=''">
+	AND mprice BETWEEN ${minprice} AND ${maxprice}
+	</if>
+	</if>
+	<if test="mintime!=''">
+	<if test="maxtime!=''">
+	AND mtime BETWEEN ${mintime} AND ${maxtime}
+	</if>
+	</if>
+	<if test="nname!=''">
+	AND nname=#{nname}
+	</if>
+	<if test="tpx==1">
+	order by mtime asc,mdate asc,nname asc
+	</if>
+	<if test="tpx==0">
+	order by mtime desc,mdate desc,nname desc
+	</if>
+	</where>
+	</select>
+	<update id="sj">
+	update movie set mzt=0 where mid=${value}
+	</update>
+	<update id="xj">
+	update movie set mzt=1 where mid=${value}
+	</update>
+	<delete id="del">
+	delete from movie where mid in(${value})
+	</delete>
+</mapper>
