@@ -27,7 +27,7 @@ public class MyController {
 	@Autowired
 	private MyService ms;
 	/** 
-	 * @Title: list 
+	 * @Title: 列表 
 	 * @Description: TODO
 	 * @param tpx
 	 * @param m
